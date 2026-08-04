@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.5.9 — Align app_id/StartupWMClass with MKI and proton-trainer
+
+- NVI never exhibited the phantom-taskbar-entry bug hit by MKI and
+  proton-trainer, because it runs under XWayland (the bundled
+  linuxdeploy GTK stack falls back to X11), where WM_CLASS comes from
+  `prgname`, which already matched `StartupWMClass`. On Wayland, though,
+  GTK4 announces the GApplication ID as the toplevel's `app_id`, not
+  `prgname` — so this was latent, not fixed. Set both `prgname` and
+  `StartupWMClass` to the application ID (`io.github.labj1987.NVI`) to
+  match MKI and proton-trainer's fix and remove the latent risk should
+  NVI's packaging ever move off linuxdeploy's bundled GTK.
+
 ## 2.5.8 — Fix phantom taskbar window from the About dialog
 
 - The About dialog used `gtk4::AboutDialog`, a `Gtk.Window` subclass that

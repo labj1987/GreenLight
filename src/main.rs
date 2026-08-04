@@ -22,10 +22,11 @@ pub fn runtime() -> &'static Runtime {
 fn main() {
     let _ = runtime();
 
-    // Set program name before GTK init — this becomes WM_CLASS on X11/Wayland
-    // and must match StartupWMClass in the .desktop file so GNOME groups the
-    // window with the dock icon instead of showing two separate entries.
-    glib::set_prgname(Some("nvidia-driver-installer"));
+    // Set program name before GTK init. On Wayland the app_id GNOME sees is
+    // the GApplication ID, not prgname; on X11 it's prgname. Setting both
+    // prgname and StartupWMClass (in the .desktop file) to the application
+    // ID makes the running window match the desktop file on either backend.
+    glib::set_prgname(Some("io.github.labj1987.NVI"));
     glib::set_application_name("NVIDIA Driver Installer");
 
     let app = libadwaita::Application::builder()
