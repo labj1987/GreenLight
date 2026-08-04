@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.5.8 — Fix phantom taskbar window from the About dialog
+
+- The About dialog used `gtk4::AboutDialog`, a `Gtk.Window` subclass that
+  creates a real separate top-level Wayland surface, showing as a
+  second, unnamed window in the dock (same bug class MKI hit and fixed
+  in its 1.0.7 and 1.0.9 releases). Switched to `libadwaita::AboutDialog`
+  (`Adw.Dialog` subclass, requires the `v1_5` feature, now enabled),
+  which renders as a sheet inside the main window's own surface.
+
 ## 2.5.7 — Fix UPDATE_INFORMATION to reference .zsync sidecar
 
 - Per the AppImage update spec, the GitHub Releases zsync transport string

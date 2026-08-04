@@ -1,6 +1,6 @@
 [package]
 name = "nvidia-driver-installer"
-version = "2.5.7"
+version = "2.5.8"
 edition = "2021"
 description = "NVIDIA Driver Installer — GTK4 GUI for Linux"
 authors = ["Alex Brown"]
@@ -11,7 +11,7 @@ path = "src/main.rs"
 
 [dependencies]
 gtk4 = { version = "0.9", features = ["v4_12"] }
-libadwaita = { version = "0.7", features = ["v1_4"] }
+libadwaita = { version = "0.7", features = ["v1_4", "v1_5"] }
 glib = "0.20"
 gio = "0.20"
 tokio = { version = "1", features = ["full"] }

@@ -11,7 +11,7 @@ use gtk4::{
 };
 use libadwaita::prelude::*;
 use libadwaita::{
-    ActionRow, Application, ApplicationWindow, Banner, HeaderBar,
+    AboutDialog, ActionRow, Application, ApplicationWindow, Banner, HeaderBar,
     PreferencesGroup, Toast, ToastOverlay,
 };
 
@@ -993,17 +993,16 @@ pub fn build_ui(app: &Application) {
                 )
             };
 
-            let dialog = gtk4::AboutDialog::builder()
-                .program_name("NVIDIA Driver Installer")
+            let dialog = AboutDialog::builder()
+                .application_name("NVIDIA Driver Installer")
                 .version(env!("CARGO_PKG_VERSION"))
-                .authors(vec!["Linnard Alex Brown Jr.".to_string()])
-                .comments(&format!(
+                .developers(vec!["Linnard Alex Brown Jr."])
+                .comments(format!(
                     "GTK4 + Rust GUI for installing NVIDIA drivers from official .run files.\n\nGPU: {}\nDriver: {}\nKernel: {}",
                     gpu, driver, kernel
                 ))
                 .build();
-            dialog.set_transient_for(Some(&window));
-            dialog.present();
+            dialog.present(Some(&window));
         });
     }
 
