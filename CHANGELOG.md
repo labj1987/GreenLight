@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.5.7 — Fix UPDATE_INFORMATION to reference .zsync sidecar
+
+- Per the AppImage update spec, the GitHub Releases zsync transport string
+  must end in the `.zsync` sidecar filename, not the AppImage filename.
+  `UPDATE_INFORMATION` in `build-appimage.sh` ended in
+  `-x86_64.AppImage` instead of `-x86_64.AppImage.zsync`, which broke
+  update detection in tools like Gear Lever even though the `.zsync`
+  sidecar itself was already being generated and published correctly.
+  Packaging-only fix, no application behavior changes.
+
 ## 2.5.6 — Fix orphaned .zsync sidecar
 
 - build-appimage.sh renamed only the built .AppImage to its final

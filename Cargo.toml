@@ -1,6 +1,6 @@
 [package]
 name = "nvidia-driver-installer"
-version = "2.5.6"
+version = "2.5.7"
 edition = "2021"
 description = "NVIDIA Driver Installer — GTK4 GUI for Linux"
 authors = ["Alex Brown"]
