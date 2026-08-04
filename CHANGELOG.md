@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.5.10 — Switch packaging to bare appimagetool (drop bundled GTK)
+
+- NVI was the only one of the three apps built with `linuxdeploy` +
+  `linuxdeploy-plugin-gtk`, which bundles its own copy of GTK4/libadwaita
+  into the AppImage from whatever the CI runner's apt repo offers — Ubuntu
+  24.04's `libadwaita-1-0 1.5.0-1ubuntu2`. That's the earliest release to
+  support `Adw.Dialog`, and its floating-dialog presentation (used by the
+  About dialog since 2.5.8) lacks the border/backdrop-dim styling refined
+  in later libadwaita releases, making it look visually flat compared to
+  MKI and proton-trainer — both of which dynamically link the host's
+  libadwaita instead of bundling one.
+  Switched `build-appimage.sh` to the same bare-`appimagetool` approach
+  already used by MKI and proton-trainer: the binary now links against
+  the host's system GTK4/libadwaita at runtime instead of a bundled copy,
+  giving it the same modern dialog styling and removing the
+  Wayland-vs-XWayland backend asymmetry between NVI and the other two
+  apps as a side effect. AppDir layout, AppRun's privileged-install
+  staging logic, and the polkit policy/appdata paths are unchanged.
+
 ## 2.5.9 — Align app_id/StartupWMClass with MKI and proton-trainer
 
 - NVI never exhibited the phantom-taskbar-entry bug hit by MKI and
