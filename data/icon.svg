@@ -1,17 +1,55 @@
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <clipPath id="iconclip">
-      <rect x="0" y="0" width="512" height="512" rx="92"/>
-    </clipPath>
-  </defs>
-  <rect x="0" y="0" width="512" height="512" rx="92" fill="#1c1c1c"/>
-  <rect x="0" y="0" width="512" height="13" rx="0" fill="#76b900" clip-path="url(#iconclip)"/>
-  <text x="256" y="310"
-        text-anchor="middle"
-        font-family="system-ui, -apple-system, sans-serif"
-        font-size="184"
-        font-weight="500"
-        letter-spacing="2"
-        fill="#ffffff">NVI</text>
-  <rect x="86" y="338" width="340" height="9" rx="4" fill="#76b900"/>
+<svg width="512" height="512" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#8FCC1A"/>
+<stop offset="1" stop-color="#5C8E00"/>
+</linearGradient>
+</defs>
+<rect x="60" y="60" width="560" height="560" rx="130" fill="url(#gg)"/>
+<g stroke="#EFFFD1" stroke-width="4" fill="none" opacity="0.9">
+<path d="M170 170 L170 230 L250 230"/>
+<path d="M170 170 L230 170 L230 220"/>
+<path d="M510 170 L510 230 L430 230"/>
+<path d="M510 170 L450 170 L450 220"/>
+<path d="M170 510 L170 450 L250 450"/>
+<path d="M510 510 L510 450 L430 450"/>
+<path d="M140 300 L200 300 L200 250"/>
+<path d="M140 380 L200 380 L200 430"/>
+<path d="M540 300 L480 300 L480 250"/>
+<path d="M540 380 L480 380 L480 430"/>
+<path d="M300 140 L300 200 L250 200"/>
+<path d="M380 140 L380 200 L430 200"/>
+<path d="M300 540 L300 480 L250 480"/>
+<path d="M380 540 L380 480 L430 480"/>
+</g>
+<g fill="#EFFFD1">
+<circle cx="170" cy="170" r="7"/>
+<circle cx="510" cy="170" r="7"/>
+<circle cx="170" cy="510" r="7"/>
+<circle cx="510" cy="510" r="7"/>
+<circle cx="140" cy="300" r="6"/>
+<circle cx="140" cy="380" r="6"/>
+<circle cx="540" cy="300" r="6"/>
+<circle cx="540" cy="380" r="6"/>
+<circle cx="300" cy="140" r="6"/>
+<circle cx="380" cy="140" r="6"/>
+<circle cx="300" cy="540" r="6"/>
+<circle cx="380" cy="540" r="6"/>
+</g>
+<g stroke="#F2FFDE" stroke-width="6" stroke-linecap="round">
+<line x1="250" y1="180" x2="250" y2="220"/>
+<line x1="320" y1="180" x2="320" y2="220"/>
+<line x1="390" y1="180" x2="390" y2="220"/>
+<line x1="250" y1="460" x2="250" y2="500"/>
+<line x1="320" y1="460" x2="320" y2="500"/>
+<line x1="390" y1="460" x2="390" y2="500"/>
+<line x1="180" y1="250" x2="220" y2="250"/>
+<line x1="180" y1="320" x2="220" y2="320"/>
+<line x1="180" y1="390" x2="220" y2="390"/>
+<line x1="460" y1="250" x2="500" y2="250"/>
+<line x1="460" y1="320" x2="500" y2="320"/>
+<line x1="460" y1="390" x2="500" y2="390"/>
+</g>
+<rect x="220" y="220" width="240" height="240" rx="28" fill="#4A7800" stroke="#F2FFDE" stroke-width="8"/>
+<path d="M340 300 L340 400 M300 360 L340 400 L380 360" fill="none" stroke="#F2FFDE" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180 340 350)"/>
 </svg>

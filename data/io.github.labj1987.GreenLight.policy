@@ -4,10 +4,10 @@
   "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 
 <policyconfig>
-  <vendor>NVIDIA Driver Installer</vendor>
+  <vendor>GreenLight</vendor>
   <vendor_url>https://github.com/labj1987/NVI</vendor_url>
 
-  <action id="io.github.labj1987.NVI.install">
+  <action id="io.github.labj1987.GreenLight.install">
     <description>Install NVIDIA driver</description>
     <message>Authentication is required to install an NVIDIA driver.</message>
     <icon_name>application-x-executable</icon_name>
@@ -16,7 +16,7 @@
       <allow_inactive>auth_admin</allow_inactive>
       <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/nvidia-driver-installer/privileged-install.sh</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/greenlight/privileged-install.sh</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
 </policyconfig>

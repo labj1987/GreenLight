@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# build-appimage.sh — build the NVIDIA Driver Installer AppImage.
+# build-appimage.sh — build the GreenLight AppImage.
 # Run from the repo root on Ubuntu (CI uses ubuntu-latest). Run as root in CI.
 set -euo pipefail
 
-APP="nvidia-driver-installer"
+APP="greenlight"
 # Single source of truth: the version in Cargo.toml
 VERSION="$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)"
 ARCH="x86_64"
@@ -43,8 +43,8 @@ cp scripts/privileged-install.sh            "$APPDIR/usr/lib/$APP/"
 chmod 755 "$APPDIR/usr/lib/$APP/privileged-install.sh"
 cp data/$APP.desktop                        "$APPDIR/usr/share/applications/"
 cp data/$APP-256.png                        "$APPDIR/usr/share/icons/hicolor/256x256/apps/$APP.png"
-cp data/io.github.labj1987.NVI.policy       "$APPDIR/usr/share/polkit-1/actions/"
-cp data/io.github.labj1987.NVI.appdata.xml  "$APPDIR/usr/share/metainfo/"
+cp data/io.github.labj1987.GreenLight.policy       "$APPDIR/usr/share/polkit-1/actions/"
+cp data/io.github.labj1987.GreenLight.appdata.xml  "$APPDIR/usr/share/metainfo/"
 
 # Top-level AppImage requirements
 cp data/$APP.desktop "$APPDIR/"
@@ -57,12 +57,12 @@ cp data/$APP-256.png "$APPDIR/$APP.png"
 cat > "$APPDIR/AppRun" << 'APPRUN'
 #!/usr/bin/env bash
 HERE="$(dirname "$(readlink -f "$0")")"
-APP="nvidia-driver-installer"
+APP="greenlight"
 
 SRC_SCRIPT="$HERE/usr/lib/$APP/privileged-install.sh"
-SRC_POLICY="$HERE/usr/share/polkit-1/actions/io.github.labj1987.NVI.policy"
+SRC_POLICY="$HERE/usr/share/polkit-1/actions/io.github.labj1987.GreenLight.policy"
 DST_SCRIPT="/usr/lib/$APP/privileged-install.sh"
-DST_POLICY="/usr/share/polkit-1/actions/io.github.labj1987.NVI.policy"
+DST_POLICY="/usr/share/polkit-1/actions/io.github.labj1987.GreenLight.policy"
 
 needs_install=0
 if [[ ! -f "$DST_SCRIPT" ]] || ! cmp -s "$SRC_SCRIPT" "$DST_SCRIPT"; then
@@ -97,7 +97,9 @@ fi
 echo "==> Packing AppImage"
 OUT="$APP-$VERSION-$ARCH.AppImage"
 
-UPDATE_INFORMATION="gh-releases-zsync|labj1987|NVI|latest|nvidia-driver-installer-*-x86_64.AppImage.zsync"
+# Repo field stays "NVI" until/unless the GitHub repo itself is renamed —
+# the update spec resolves releases through the repo name.
+UPDATE_INFORMATION="gh-releases-zsync|labj1987|NVI|latest|greenlight-*-x86_64.AppImage.zsync"
 VERSION="$VERSION" ARCH="$ARCH" "$TOOL" --appimage-extract-and-run \
     -u "$UPDATE_INFORMATION" "$APPDIR" "$OUT"
 

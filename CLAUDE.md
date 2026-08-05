@@ -1,10 +1,11 @@
-# NVI — NVIDIA Driver Installer
+# GreenLight (formerly NVI / NVIDIA Driver Installer)
 
 GTK4 + libadwaita GUI, written in Rust, for browsing and installing
 official NVIDIA `.run` drivers from download.nvidia.com. Distributed as
 a single AppImage — **AppImage-only; no `.deb` packaging should ever be
 reintroduced** (it was deliberately removed, along with the DBus service
-file, when the app moved to the `io.github.labj1987.NVI` application ID).
+file, when the app moved to the `io.github.labj1987.NVI` application ID —
+since renamed to `io.github.labj1987.GreenLight`).
 
 Install model is repo-style: the new driver goes to disk while the
 current one keeps running (`--allow-installation-with-running-driver`),
@@ -28,29 +29,27 @@ black screens.
 
 ## Build process
 
-`build-appimage.sh` builds the AppImage — **unlike MKI, this uses
-`linuxdeploy` + the GTK plugin, not `appimagetool` directly**:
+`build-appimage.sh` builds the AppImage — same `appimagetool`-direct
+pattern as MKI/KernelPop, not `linuxdeploy` (an earlier version of this
+doc claimed otherwise; the script itself never has):
 1. Installs build deps via apt (cargo, rustc, gtk4/adwaita dev headers,
-   `wget`, `zsync`), plus `libfuse2`/`libfuse2t64` best-effort.
+   `wget`, `zsync`, `desktop-file-utils`).
 2. `cargo build --release`.
 3. Assembles the AppDir (binary, privileged script, polkit policy,
    appdata, desktop file, icon, generated `AppRun`).
-4. Downloads `linuxdeploy` (continuous build) + the linuxdeploy-plugin-gtk
-   script, and runs linuxdeploy with `UPDATE_INFORMATION` set for
-   `gh-releases-zsync` delta updates.
-5. Renames whatever linuxdeploy/appimagetool named the output file to
-   `nvidia-driver-installer-$VERSION-x86_64.AppImage`.
+4. Downloads `appimagetool` (continuous build) and packs the AppDir into
+   `greenlight-$VERSION-x86_64.AppImage`, with `UPDATE_INFORMATION` set
+   for `gh-releases-zsync` delta updates.
+5. Runs `zsyncmake` directly on the built AppImage to produce the
+   `.zsync` sidecar (see gotcha below).
 
-**Gotcha (fixed in v2.5.6):** step 5's rename only covered the
-`.AppImage` file. linuxdeploy/appimagetool can also produce a same-named
-`.zsync` sidecar under the *original* (un-versioned) output filename —
-that file was never renamed or moved, so it sat orphaned on disk under
-a filename CI's release-asset glob doesn't match, and the `.zsync` never
-got uploaded even when it was successfully generated. The rename step
-now explicitly moves `OUTFILE.zsync` →
-`nvidia-driver-installer-$VERSION-x86_64.AppImage.zsync` right after the
-AppImage rename, if it exists. When touching the OUTFILE rename logic
-again, remember there are two files to rename, not one.
+**Gotcha (fixed in v2.5.6, predates the GreenLight rename):**
+`appimagetool`'s own built-in zsync generation silently no-ops on the
+GitHub Actions runner even when `UPDATE_INFORMATION` is set and
+`zsync`/`zsyncmake` are installed and working. Do not rely on
+`appimagetool` to generate the `.zsync` — call `zsyncmake "$OUT"`
+directly right after packing, as the script does now. Keep that call
+non-fatal (the AppImage is valid without the sidecar).
 
 ## Release process
 
@@ -69,6 +68,7 @@ again, remember there are two files to rename, not one.
 - Don't use `sed`/`awk` to edit files — use direct file writes/edits.
   `tee` is fine for one-off terminal inspection, but Claude Code sessions
   should edit files directly rather than shelling through it.
-- Repo lives at `/home/alex/NVI`, owned by user `alex` — if operating as
-  root, run git commands as `alex` (`su -s /bin/bash alex -c '...'`) to
-  keep authorship and file ownership correct.
+- Repo lives at `/home/alex/Projects/NVI`, owned by user `alex` — if
+  operating as root, run git commands as `alex`
+  (`su -s /bin/bash alex -c '...'`) to keep authorship and file
+  ownership correct.

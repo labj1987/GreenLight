@@ -24,6 +24,6 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
-          files: nvidia-driver-installer-*-x86_64.AppImage*
+          files: greenlight-*-x86_64.AppImage*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

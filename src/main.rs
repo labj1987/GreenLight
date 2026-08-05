@@ -26,11 +26,11 @@ fn main() {
     // the GApplication ID, not prgname; on X11 it's prgname. Setting both
     // prgname and StartupWMClass (in the .desktop file) to the application
     // ID makes the running window match the desktop file on either backend.
-    glib::set_prgname(Some("io.github.labj1987.NVI"));
-    glib::set_application_name("NVIDIA Driver Installer");
+    glib::set_prgname(Some("io.github.labj1987.GreenLight"));
+    glib::set_application_name("GreenLight");
 
     let app = libadwaita::Application::builder()
-        .application_id("io.github.labj1987.NVI")
+        .application_id("io.github.labj1987.GreenLight")
         .flags(gio::ApplicationFlags::FLAGS_NONE)
         .build();
 

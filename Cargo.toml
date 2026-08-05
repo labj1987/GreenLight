@@ -1,12 +1,12 @@
 [package]
-name = "nvidia-driver-installer"
+name = "greenlight"
 version = "2.5.10"
 edition = "2021"
-description = "NVIDIA Driver Installer — GTK4 GUI for Linux"
+description = "GreenLight — GTK4 GUI for installing NVIDIA drivers on Linux"
 authors = ["Alex Brown"]
 
 [[bin]]
-name = "nvidia-driver-installer"
+name = "greenlight"
 path = "src/main.rs"
 
 [dependencies]

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.labj1987.NVI</id>
+  <id>io.github.labj1987.GreenLight</id>
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
-  <name>NVIDIA Driver Installer</name>
+  <name>GreenLight</name>
   <summary>Browse, verify, and install NVIDIA Linux drivers</summary>
   <description>
     <p>
@@ -14,7 +14,7 @@
       secure boot, and disk space.
     </p>
   </description>
-  <launchable type="desktop-id">nvidia-driver-installer.desktop</launchable>
+  <launchable type="desktop-id">greenlight.desktop</launchable>
   <url type="homepage">https://github.com/labj1987/NVI</url>
   <developer id="io.github.labj1987">
     <name>Alex Brown</name>

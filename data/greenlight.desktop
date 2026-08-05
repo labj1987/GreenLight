@@ -1,12 +1,12 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=NVIDIA Driver Installer
+Name=GreenLight
 Comment=Install NVIDIA drivers from official .run files
-Exec=nvidia-driver-installer
-Icon=nvidia-driver-installer
+Exec=greenlight
+Icon=greenlight
 Terminal=false
 Categories=System;
 Keywords=nvidia;driver;gpu;install;
 StartupNotify=true
-StartupWMClass=io.github.labj1987.NVI
+StartupWMClass=io.github.labj1987.GreenLight

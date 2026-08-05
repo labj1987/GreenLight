@@ -637,6 +637,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "greenlight"
+version = "2.5.10"
+dependencies = [
+ "anyhow",
+ "futures-util",
+ "gio",
+ "glib",
+ "gtk4",
+ "hex",
+ "libadwaita",
+ "regex",
+ "reqwest",
+ "scraper",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tokio",
+]
+
+[[package]]
 name = "gsk4"
 version = "0.9.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1169,26 +1189,6 @@ name = "new_debug_unreachable"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
-
-[[package]]
-name = "nvidia-driver-installer"
-version = "2.5.10"
-dependencies = [
- "anyhow",
- "futures-util",
- "gio",
- "glib",
- "gtk4",
- "hex",
- "libadwaita",
- "regex",
- "reqwest",
- "scraper",
- "serde",
- "serde_json",
- "sha2",
- "tokio",
-]
 
 [[package]]
 name = "once_cell"

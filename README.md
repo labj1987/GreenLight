@@ -1,6 +1,6 @@
-# NVI - NVIDIA Driver Installer
+# GreenLight
 
-A Linux desktop app for installing NVIDIA drivers from the official `.run` files. Written in Rust with GTK4 and libadwaita.
+A Linux desktop app for installing NVIDIA drivers from the official `.run` files. Written in Rust with GTK4 and libadwaita. (Formerly known as NVI / NVIDIA Driver Installer.)
 
 I run NVIDIA's `.run` drivers instead of the packaged ones because the repos lag behind and I sometimes need a specific version. The usual routine for that is dropping to a TTY, stopping the display manager, running the installer blind, and hoping the desktop comes back. This app skips all of that. It installs the new driver to disk the same way a package manager does, while the current driver keeps running. The swap happens on your next reboot and your desktop never goes down.
 
@@ -38,11 +38,11 @@ Developed and tested on Ubuntu 26.04, GNOME on Wayland, RTX 5070, 595.x driver b
 Download the AppImage from [Releases](../../releases):
 
 ```bash
-chmod +x nvidia-driver-installer-*-x86_64.AppImage
-./nvidia-driver-installer-*-x86_64.AppImage
+chmod +x greenlight-*-x86_64.AppImage
+./greenlight-*-x86_64.AppImage
 ```
 
-The first launch asks for your password once so it can place the install helper at `/usr/lib/nvidia-driver-installer/` and register its polkit policy. After that it starts like any other app. If you later download a newer AppImage, it detects the change and refreshes those files on its own.
+The first launch asks for your password once so it can place the install helper at `/usr/lib/greenlight/` and register its polkit policy. After that it starts like any other app. If you later download a newer AppImage, it detects the change and refreshes those files on its own.
 
 ## Using it
 
@@ -75,7 +75,7 @@ Reboot afterward to switch drivers, same as the GUI flow.
 
 Two files tell you everything:
 
-- `/var/log/nvidia-driver-installer.log` is written by this app's install script, step by step
+- `/var/log/greenlight.log` is written by this app's install script, step by step
 - `/var/log/nvidia-installer.log` is NVIDIA's own installer log
 
 If an install fails, the reason is in one of those. The most common cause is missing kernel headers for a brand new kernel, which resolves once your distro publishes them.
@@ -91,8 +91,8 @@ sudo nvidia-uninstall
 To remove this app, delete the AppImage and optionally the helper files it installed:
 
 ```bash
-sudo rm -rf /usr/lib/nvidia-driver-installer
-sudo rm /usr/share/polkit-1/actions/io.github.labj1987.NVI.policy
+sudo rm -rf /usr/lib/greenlight
+sudo rm /usr/share/polkit-1/actions/io.github.labj1987.GreenLight.policy
 ```
 
 ## Building from source

@@ -15,7 +15,7 @@ pub struct InstallOptions {
 /// reboot. Nothing touches the live session, so a plain blocking call
 /// is safe — the GUI stays up the whole time.
 pub fn run_privileged_install(opts: &InstallOptions) -> Result<()> {
-    let script = "/usr/lib/nvidia-driver-installer/privileged-install.sh";
+    let script = "/usr/lib/greenlight/privileged-install.sh";
 
     if !Path::new(script).exists() {
         bail!("Privileged install script not found at {}", script);
@@ -43,7 +43,7 @@ pub fn run_privileged_install(opts: &InstallOptions) -> Result<()> {
             bail!("Authentication was cancelled.");
         }
         bail!(
-            "Install script exited with code {} (see /var/log/nvidia-driver-installer.log)",
+            "Install script exited with code {} (see /var/log/greenlight.log)",
             code
         );
     }

@@ -18,9 +18,9 @@
 
 set -uo pipefail
 
-LOGFILE="/var/log/nvidia-driver-installer.log"
+LOGFILE="/var/log/greenlight.log"
 log() {
-    local msg="[nvidia-installer] $*"
+    local msg="[greenlight] $*"
     echo "$msg"
     echo "$(date '+%Y-%m-%d %H:%M:%S') $msg" >> "$LOGFILE" 2>/dev/null || true
 }
@@ -87,7 +87,7 @@ log "Removing distro-managed NVIDIA packages (if any)…"
 if [[ "$PKG_MGR" == "apt" ]]; then
     apt-mark unhold 'nvidia*' 'libnvidia*' 2>/dev/null || true
     PKGS=$(dpkg -l 'nvidia-*' 'libnvidia-*' 'libcuda*' 'libcudnn*' 2>/dev/null \
-        | awk '/^ii/{print $2}' | grep -v '^nvidia-driver-installer' || true)
+        | awk '/^ii/{print $2}' | grep -v '^greenlight' || true)
     if [[ -n "$PKGS" ]]; then
         log "  purging: $PKGS"
         dpkg --remove --force-remove-reinstreq $PKGS >>"$LOGFILE" 2>&1 || true
