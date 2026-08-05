@@ -5,7 +5,7 @@
 
 <policyconfig>
   <vendor>GreenLight</vendor>
-  <vendor_url>https://github.com/labj1987/NVI</vendor_url>
+  <vendor_url>https://github.com/labj1987/GreenLight</vendor_url>
 
   <action id="io.github.labj1987.GreenLight.install">
     <description>Install NVIDIA driver</description>
