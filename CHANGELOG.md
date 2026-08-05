@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.6.0 — Rebrand to GreenLight, new icon set
+
+NVI is now GreenLight. Full rename — crate/package name, application ID
+(`io.github.labj1987.GreenLight`), prgname, window title, About dialog,
+desktop file, appdata, polkit policy, install-script/log paths
+(`/usr/lib/greenlight/`, `/var/log/greenlight.log`), and the HTTP user
+agent. Pure rebrand, no behavior change.
+
+- Replaces the icon set with the approved green circuit-board chip
+  design, rendered natively at 16/32/48/64/128/256/512px (not just
+  downscaled from one size) and verified legible at the small sizes
+  used in the GNOME dock/app grid.
+- Corrects `CLAUDE.md`'s build-process section, which described
+  `build-appimage.sh` as using `linuxdeploy` — that stopped being true
+  as of 2.5.10's switch to bare `appimagetool`; the doc just never
+  caught up.
+- Fixes `.gitignore`: it excluded `/AppDir/`, but `build-appimage.sh`
+  has always nested the AppDir at `build-appimage/AppDir`, so that
+  pattern never matched anything.
+
+The GitHub repo itself (`labj1987/NVI`) is intentionally left unrenamed
+for now — `build-appimage.sh`'s `UPDATE_INFORMATION` and the appdata/
+policy URLs still point at NVI.
+
 ## 2.5.10 — Switch packaging to bare appimagetool (drop bundled GTK)
 
 - NVI was the only one of the three apps built with `linuxdeploy` +
