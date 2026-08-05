@@ -1,6 +1,6 @@
 [package]
 name = "greenlight"
-version = "2.6.0"
+version = "2.6.1"
 edition = "2021"
 description = "GreenLight — GTK4 GUI for installing NVIDIA drivers on Linux"
 authors = ["Alex Brown"]

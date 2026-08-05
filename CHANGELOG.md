@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.1 — 2026-08-05
+
+- Fixes the AppImage's self-update pointer, which still referenced the
+  pre-rename `NVI` repo — it now points at `GreenLight`, matching where
+  the 2.6.0 release actually lives.
+
 ## 2.6.0 — Rebrand to GreenLight, new icon set
 
 NVI is now GreenLight. Full rename — crate/package name, application ID
