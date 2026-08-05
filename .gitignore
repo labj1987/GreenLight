@@ -2,8 +2,6 @@
 /target/
 
 # Packaging artifacts
-/AppDir/
+/build-appimage/
 *.AppImage
-*.deb
-linuxdeploy-x86_64.AppImage
-linuxdeploy-plugin-gtk.sh
+*.AppImage.zsync
