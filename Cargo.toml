@@ -10,16 +10,16 @@ name = "greenlight"
 path = "src/main.rs"
 
 [dependencies]
-gtk4 = { version = "0.9", features = ["v4_12"] }
-libadwaita = { version = "0.7", features = ["v1_4", "v1_5"] }
-glib = "0.20"
-gio = "0.20"
+gtk4 = { version = "0.11", features = ["v4_22"] }
+libadwaita = { version = "0.9", features = ["v1_9"] }
+glib = "0.22"
+gio = "0.22"
 tokio = { version = "1", features = ["full"] }
-reqwest = { version = "0.12", features = ["stream"] }
+reqwest = { version = "0.13", features = ["stream"] }
 sha2 = "0.10"
 hex = "0.4"
 futures-util = "0.3"
-scraper = "0.21"
+scraper = "0.27"
 regex = "1"
 anyhow = "1"
 serde = { version = "1", features = ["derive"] }
