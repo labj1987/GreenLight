@@ -1,6 +1,6 @@
 [package]
 name = "greenlight"
-version = "2.7.0"
+version = "2.7.1"
 edition = "2021"
 description = "GreenLight — GTK4 GUI for installing NVIDIA drivers on Linux"
 authors = ["Alex Brown"]
@@ -10,8 +10,8 @@ name = "greenlight"
 path = "src/main.rs"
 
 [dependencies]
-gtk4 = { version = "0.11", features = ["v4_22"] }
-libadwaita = { version = "0.9", features = ["v1_9"] }
+gtk4 = { version = "0.11", features = ["v4_12"] }
+libadwaita = { version = "0.9", features = ["v1_4", "v1_5"] }
 glib = "0.22"
 gio = "0.22"
 tokio = { version = "1", features = ["full"] }

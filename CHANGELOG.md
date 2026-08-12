@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.7.1 — 2026-08-12
+
+- Fixes the 2.7.0 release build, which failed in CI: its gtk4/libadwaita
+  feature flags (`v4_22`/`v1_9`) required a newer system GTK4/libadwaita
+  than the GitHub Actions runner's `libgtk-4-dev` provides (4.14.5).
+  Dialed the feature flags back to `v4_12`/`v1_4,v1_5` — nothing in this
+  release actually needs the newer APIs.
+
 ## 2.7.0 — 2026-08-12
 
 - Browse list now labels each driver version's release branch (Production,
