@@ -1050,6 +1050,17 @@ fn populate_list(
             row.add_css_class("success");
         }
 
+        // Branch badge (Production/New Feature/LTS/Legacy) — omitted rather
+        // than guessed when the version doesn't match a known branch range.
+        if let Some(branch) = ver.branch {
+            let badge = Label::new(Some(branch.label()));
+            badge.add_css_class("caption");
+            badge.add_css_class("pill");
+            badge.add_css_class(branch.css_class());
+            badge.set_valign(Align::Center);
+            row.add_suffix(&badge);
+        }
+
         list_box.append(&row);
     }
 }
