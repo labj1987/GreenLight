@@ -8,15 +8,20 @@ I run NVIDIA's `.run` drivers instead of the packaged ones because the repos lag
 
 | System | Browse |
 |---|---|
-| ![System tab showing GPU, driver, kernel, DKMS, and disk info](screenshots/system.png) | ![Browse tab showing version list with upgrade/installed/older labels](screenshots/browse.png) |
+| ![System tab showing GPU, driver, kernel, DKMS, and disk info](screenshots/system.png) | ![Browse tab showing version list with branch labels and upgrade/installed/older status](screenshots/browse.png) |
 
-| Configure | About |
+| Configure | Log |
 |---|---|
-| ![Configure tab showing selected driver, checksum, and install options](screenshots/configure.png) | ![About dialog showing app version and live system info](screenshots/about.png) |
+| ![Configure tab showing selected driver, checksum, and install options](screenshots/configure.png) | ![Log tab showing driver query and version fetch output](screenshots/log.png) |
+
+| About |
+|---|
+| ![About dialog showing app version and live system info](screenshots/about.png) |
 
 ## What it does
 
 - Lists every driver version on `download.nvidia.com`, newest first, and marks the one you're currently running
+- Labels each version's release branch (Production, New Feature, Long Term Support, or Legacy)
 - Downloads and verifies against NVIDIA's published SHA256 sums
 - Opens local `.run` files too, so Vulkan beta drivers or anything else you downloaded by hand work the same way
 - Shows your GPU, running driver, kernel, DKMS status, Secure Boot state, and free disk space in one place
