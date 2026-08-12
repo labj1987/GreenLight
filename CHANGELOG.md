@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.7.0 — 2026-08-12
+
+- Browse list now labels each driver version's release branch (Production,
+  New Feature, Long Term Support, or Legacy) with a small tinted badge,
+  classified from the version number against NVIDIA's current branch
+  ranges. A version that doesn't match a known branch is left unlabeled
+  rather than guessed at.
+- Dependency bump: gtk4 0.11, libadwaita 0.9, glib/gio 0.22, reqwest 0.13,
+  scraper 0.27 — matching the GTK4/libadwaita versions actually shipping
+  on Ubuntu 26.04.
+- CI: the release workflow no longer sets `GITHUB_TOKEN` explicitly (picked
+  up automatically via the `contents: write` permission) and now generates
+  release notes automatically, matching KernelPop/SteamPunk's workflow.
+- The `screenshots/` directory is now wired into the AppStream metadata.
+
 ## 2.6.1 — 2026-08-05
 
 - Fixes the AppImage's self-update pointer, which still referenced the
