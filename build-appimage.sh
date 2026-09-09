@@ -20,7 +20,11 @@ apt-get install -y -qq zsync
 
 if ! command -v cargo >/dev/null 2>&1 || ! pkg-config --exists gtk4 2>/dev/null; then
     echo "==> Installing build dependencies"
-    apt-get update -qq
+    # Tolerate an unrelated third-party repo (e.g. the runner image's preinstalled
+    # Google Chrome source) failing to refresh -- apt falls back to its cached index
+    # for that repo and still refreshes everything else; only `apt-get install`
+    # failing on a package we actually need should be fatal.
+    apt-get update -qq || true
     apt-get install -y -qq cargo rustc libgtk-4-dev libadwaita-1-dev \
         pkg-config libssl-dev wget file desktop-file-utils zsync
 fi
