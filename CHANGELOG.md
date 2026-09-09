@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.2 — 2026-09-09
+
+- Credits Claude Code (Anthropic) in the About dialog's acknowledgements.
+
 ## 2.7.1 — 2026-08-12
 
 - Fixes the 2.7.0 release build, which failed in CI: its gtk4/libadwaita
