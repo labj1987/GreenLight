@@ -83,18 +83,48 @@ fi
 # Removing package files does not affect the running driver — the loaded
 # kernel module and already-mapped libraries keep working, same as
 # during a normal package-manager driver upgrade.
+#
+# The package set here has caused two real failures in practice:
+#   - nvidia-container-toolkit / libnvidia-container* match nvidia-*/
+#     libnvidia-* but are Docker's GPU-passthrough plumbing, not the
+#     display driver. Purging them doesn't touch the running driver, but
+#     it breaks every GPU container the moment its runtime next restarts
+#     (confirmed: took down a running Frigate NVR container this way).
+#   - xserver-xorg-video-nvidia-<ver> does NOT match nvidia-*/libnvidia-*
+#     (wrong prefix) but is part of the same apt-managed driver flavor and
+#     is a reverse-dependency of nvidia-support-<ver>. Leaving it installed
+#     makes dpkg refuse to remove nvidia-support-<ver> — silently, since
+#     every removal below used to be `|| true`. The half-removed state that
+#     resulted left nvidia-support-<ver>'s
+#     /usr/lib/nvidia/alternate-install-present marker file in place, which
+#     makes the .run installer itself abort with "please use the Debian
+#     packages instead" — on a machine that's mid-purge of those exact
+#     packages. Confirmed end to end against a real install.
 log "Removing distro-managed NVIDIA packages (if any)…"
 if [[ "$PKG_MGR" == "apt" ]]; then
-    apt-mark unhold 'nvidia*' 'libnvidia*' 2>/dev/null || true
-    PKGS=$(dpkg -l 'nvidia-*' 'libnvidia-*' 'libcuda*' 'libcudnn*' 2>/dev/null \
-        | awk '/^ii/{print $2}' | grep -v '^greenlight' || true)
+    apt-mark unhold 'nvidia*' 'libnvidia*' 'xserver-xorg-video-nvidia*' 2>/dev/null || true
+    PKGS=$(dpkg -l 'nvidia-*' 'libnvidia-*' 'libcuda*' 'libcudnn*' \
+                 'xserver-xorg-video-nvidia*' 2>/dev/null \
+        | awk '/^ii/{print $2}' | grep -v '^greenlight' \
+        | grep -vE '^(nvidia-container-toolkit|libnvidia-container)' || true)
     if [[ -n "$PKGS" ]]; then
         log "  purging: $PKGS"
-        dpkg --remove --force-remove-reinstreq $PKGS >>"$LOGFILE" 2>&1 || true
-        apt-get purge -y $PKGS >>"$LOGFILE" 2>&1 || true
+        if ! apt-get purge -y $PKGS >>"$LOGFILE" 2>&1; then
+            log "WARNING: apt-get purge hit a dependency conflict — retrying with dpkg --force-all"
+            dpkg --purge --force-all $PKGS >>"$LOGFILE" 2>&1 \
+                || log "WARNING: some distro NVIDIA packages could not be removed — check $LOGFILE"
+        fi
     fi
     update-alternatives --remove-all nvidia 2>/dev/null || true
     update-alternatives --remove-all nvidia-ld.so.conf 2>/dev/null || true
+
+    # The .run installer refuses to proceed if this marker is present,
+    # regardless of whether the purge above actually removed the distro
+    # package that left it there.
+    if [[ -e /usr/lib/nvidia/alternate-install-present ]]; then
+        log "Removing stale alternate-install marker left by the distro packages…"
+        rm -f /usr/lib/nvidia/alternate-install-present
+    fi
 else
     # Fedora driver packages typically come from RPM Fusion: akmod-nvidia,
     # xorg-x11-drv-nvidia*, kmod-nvidia*, nvidia-driver* if present.
@@ -152,7 +182,9 @@ fi
 # ── Step 7: Optional package hold ──────────────────────────────────────
 if [[ $HOLD_PKG -eq 1 ]]; then
     if [[ "$PKG_MGR" == "apt" ]]; then
-        HELD=$(dpkg -l 'nvidia-*' 'libnvidia-*' 2>/dev/null | awk '/^ii/{print $2}' || true)
+        HELD=$(dpkg -l 'nvidia-*' 'libnvidia-*' 'xserver-xorg-video-nvidia*' 2>/dev/null \
+            | awk '/^ii/{print $2}' \
+            | grep -vE '^(nvidia-container-toolkit|libnvidia-container)' || true)
         if [[ -n "$HELD" ]]; then
             apt-mark hold $HELD >>"$LOGFILE" 2>&1 || true
             log "Held packages: $HELD"

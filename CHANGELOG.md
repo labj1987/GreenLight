@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.7.3 — 2026-09-17
+
+- Fixes the distro-package cleanup step purging `nvidia-container-toolkit`
+  and `libnvidia-container*` — these match the `nvidia-*`/`libnvidia-*`
+  purge glob but are Docker's GPU-passthrough plumbing, not the display
+  driver. Removing them doesn't touch the running driver but breaks every
+  GPU container the moment its runtime next restarts (confirmed: took down
+  a running Frigate NVR container this way). They're now excluded.
+- Fixes the same cleanup step missing `xserver-xorg-video-nvidia-<ver>`,
+  which doesn't match the `nvidia-*`/`libnvidia-*` glob but is a
+  reverse-dependency of `nvidia-support-<ver>`. Leaving it installed made
+  dpkg silently refuse to remove `nvidia-support-<ver>` (every removal
+  command was `|| true`), leaving its
+  `/usr/lib/nvidia/alternate-install-present` marker file in place — which
+  makes the `.run` installer itself abort with "please use the Debian
+  packages instead," on a machine that's mid-purge of those exact
+  packages. Now included in the purge, and the marker is removed
+  explicitly afterward regardless of whether the purge reported success,
+  and a failed `apt-get purge` now retries once with
+  `dpkg --purge --force-all` instead of silently giving up.
+
 ## 2.7.2 — 2026-09-09
 
 - Credits Claude Code (Anthropic) in the About dialog's acknowledgements.
