@@ -4,6 +4,7 @@ version = "2.7.2"
 edition = "2021"
 description = "GreenLight — GTK4 GUI for installing NVIDIA drivers on Linux"
 authors = ["Alex Brown"]
+license = "AGPL-3.0-or-later"
 
 [[bin]]
 name = "greenlight"

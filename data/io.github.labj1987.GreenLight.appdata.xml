@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>io.github.labj1987.GreenLight</id>
   <metadata_license>MIT</metadata_license>
-  <project_license>MIT</project_license>
+  <project_license>AGPL-3.0-or-later</project_license>
   <name>GreenLight</name>
   <summary>Browse, verify, and install NVIDIA Linux drivers</summary>
   <description>

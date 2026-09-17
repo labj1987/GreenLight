@@ -116,6 +116,10 @@ The script runs NVIDIA's installer with `--allow-installation-with-running-drive
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0-or-later. See [LICENSE](LICENSE).
+
+Code at or before commit `fe3a6c563bfeff0391e0f9bab21f60533721cb7a` remains available
+under the MIT License per its original release. From this commit forward,
+AGPL-3.0-or-later.
 
 Linnard Alex Brown Jr.
